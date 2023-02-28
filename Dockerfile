@@ -13,4 +13,5 @@ RUN set -eux; \
 	apt-get install -y xmake curl; \
 	apt purge software-properties-common -y; \
 	apt autoremove -y; \
+	apt install gcc -y; \
 	rm -rf /var/lib/apt/lists/*
