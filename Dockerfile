@@ -1,5 +1,16 @@
-FROM alpine:latest
+FROM debian:bullseye
 
 ENV XMAKE_ROOT y
-RUN apk add --no-cache bash curl p7zip unzip git libexecinfo-dev gcc g++ make readline-dev ncurses-dev libc-dev linux-headers && curl -fsSL https://raw.githubusercontent.com/tboox/xmake/master/scripts/get.sh | bash
 
+ENV LANG C.UTF-8
+
+# runtime dependencies
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		build-essential curl; \
+	rm -rf /var/lib/apt/lists/*
+
+RUn curl --insecure -fsSL https://xmake.io/shget.text --output shget.text; \
+  bash shget.text; \
+  rm shget.text
